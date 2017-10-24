@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Contoh1 {
+public class Contoh2 {
 	//matrix
 	String[][] data;
 	int baris = 0;
@@ -15,7 +15,7 @@ public class Contoh1 {
 		data = new String[this.baris][this.kolom];
 		for(int i = 0; i < this.baris; i++){
 			for(int j = 0; j < this.kolom; j++){
-				if(i == j){
+				if(i + j == input - 1){
 					data[i][j] = i + "," + j;
 				}
 				
@@ -38,7 +38,7 @@ public class Contoh1 {
 	}
 	
 	public static void main(String args[]){
-		Contoh1 contoh = new Contoh1();
+		Contoh2 contoh = new Contoh2();
 		contoh.setData(9);
 		/*
 		 * i = 0 => j = 0 - 8
