@@ -23,18 +23,20 @@ public class Home extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try{
-			PrintWriter output = resp.getWriter();
-			/*output.println("<html>"
-					+ "<body style='background-color: red;'>"
-					+ "hallo world"
-					+ "</body>"
-					+ "</html>");*/
+			//mendapatkan data ID dari URL
+			if(req.getParameter("user_id") != null){
+				int id = Integer.parseInt(req.getParameter("user_id"));
+				User user = new User();
+				user.setId(id);
+				//delete user by id
+				userDao.delete(user);
+			}
 			
 			List<User> users = userDao.getAllUser();
 			req.setAttribute("users", users);
 			RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/home.jsp");
-			
 			rd.forward(req, resp);
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}
