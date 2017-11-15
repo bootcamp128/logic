@@ -10,34 +10,47 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<script type="text/javascript" src="${root}resources/js/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script type="text/javascript" src="${root}resources/js/myscript.js"></script>
 </head>
 <body>
-	<form action="${root}employee/save" method="POST">
-		<input type="text" placeholder="enter your name" name="name" /><br/>
-		<input type="text" placeholder="enter your address" name="address" /><br/>
-		<input type="text" placeholder="enter your birth day" name="birthDay" /><br/>
-		<input type="text" placeholder="enter your email" name="email" /><br/>
-		<input type="submit" name="submit" value="save"/>
-	</form>
-	<table>
-		<thead>
-			<th>Name</th>
-			<th>Address</th>
-			<th>Email</th>
-		</thead>
-		<tbody>
-	<c:forEach items="${employees}" var="emp">
-		<tr>
-			<td>${emp.name}</td><td>${emp.address}</td><td>${emp.email}</td>
-		</tr>
-	</c:forEach>
-		</tbody>
-	</table>
-	<% 
-		/*// List<Employee> employees = (List<Employee>)request.getAttribute("employees"); 
-		for(Employee emp : employees){
-			out.print("name : "+ emp.getName());
-		} */
-	%>
+	<div class="container">
+		<form action="${root}employee/save" method="POST">
+			<input type="text" placeholder="enter your name" name="name" /><br/>
+			<input type="text" placeholder="enter your address" name="address" /><br/>
+			<input type="text" placeholder="enter your birth day" name="birthDay" /><br/>
+			<input type="text" placeholder="enter your email" name="email" /><br/>
+			<input type="submit" name="submit" value="save"/>
+		</form>
+		<p/>
+		<hr/>
+		<table class="table table-striped table-hover table-bordered" style="border-collapse: collapse;" border=1>
+			<thead>
+				<tr class="bg-info">
+					<th scope="col">Name</th>
+					<th scope="col">Address</th>
+					<th scope="col">Email</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+		<c:forEach items="${employees}" var="emp">
+			<tr scope="row">
+				<td>${emp.name}</td>
+				<td>${emp.address}</td>
+				<td>${emp.email}</td>
+				<td>
+					<a data-id="${emp.id}" class="del btn btn-danger btn-sm" href="#">Delete</a>
+					<a data-id="${emp.id}" class="upd btn btn-warning btn-sm" href="#">Update</a>
+				</td>
+			</tr>
+		</c:forEach>
+			</tbody>
+		</table>
+	</div><!-- bootstrap container -->
+	<%@ include file="/resources/modal/mymodal.html" %>
 </body>
 </html>

@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="employee")
 public class Employee {
@@ -24,6 +26,7 @@ public class Employee {
 	private String email;
 	@Column(name="birth_day")
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date birthDay;
 	public int getId() {
 		return id;

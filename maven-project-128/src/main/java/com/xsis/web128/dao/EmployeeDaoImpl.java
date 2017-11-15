@@ -33,4 +33,28 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 		return employees;
 	}
+	
+	public void delete(Employee emp) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		//1. String hql = "delete from Employee emp where emp = :id";
+		//	 session.createQuery(hql).setParameter('id', emp.getId());
+		//3. delete(emp);
+		session.delete(emp);
+		session.flush();
+	}
+
+	public Employee getEmployeeById(int id) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		Employee emp = session.get(Employee.class, id);
+		return emp;
+	}
+
+	public void update(Employee emp) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		session.update(emp);
+		session.flush();
+	}
 }
