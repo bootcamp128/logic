@@ -26,7 +26,6 @@ public class Employee {
 	private String email;
 	@Column(name="birth_day")
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date birthDay;
 	public int getId() {
 		return id;

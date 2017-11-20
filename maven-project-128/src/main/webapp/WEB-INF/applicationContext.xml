@@ -32,6 +32,8 @@
 		 <property name="annotatedClasses">
 				<list>
 					<value>com.xsis.web128.entity.Employee</value>
+					<value>com.xsis.web128.entity.Penjualan</value>
+					<value>com.xsis.web128.entity.Customer</value>
 				</list>
 			</property>
 			<property name="hibernateProperties">

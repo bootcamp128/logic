@@ -1,5 +1,6 @@
 //jquery is js framework
 	// ready for DOM HTML
+
 $(document).ready(function(){
 	//event untuk button delet
 	$('.del').on('click', function(){
@@ -26,10 +27,11 @@ $(document).ready(function(){
 	$('.upd').on('click', function(){
 		var id = $(this).attr('data-id');
 		$.ajax({
-			url: 'employee/get/'+id,
+			url: 'penjualan/get/'+id,
 			type: 'GET',
-			success: function(employee){
-				_setFormModalUpdate(employee);
+			success: function(penjualan){
+				console.log(penjualan);
+				_setFormModalUpdate(penjualan);
 			},error: function(){
 				alert('failed load data');
 			}
@@ -38,14 +40,23 @@ $(document).ready(function(){
 	});
 	
 	$('#btn-change').on('click', function(){
-		var employee = _getFormModalUpdate();
+		//var employee = _getFormModalUpdate();
+		var penjualan = {
+			id : $('#id-penjualan').val(),
+			no_penjualan : $('#input-no-penjualan').val(),
+			location : $('#input-lokasi').val(),
+			customer : {
+				id : $('#input-pembeli').val()
+			}
+		}
 		$.ajax({
-			url : 'employee/update',
+			url : 'penjualan/update',
 			type: 'PUT',
-			data: JSON.stringify(employee),
+			data: JSON.stringify(penjualan),
 			contentType: "application/json",
 			success: function(data){
-				window.location="employee";
+				
+				window.location="penjualan";
 				//$('#modal-data-edit').modal('hide');
 			},error : function(){
 				console.log('data gagal diubah!!');
@@ -54,12 +65,12 @@ $(document).ready(function(){
 		
 	});
 	//set form update data
-	function _setFormModalUpdate(employee){
-		$('#inputName').val(employee.name);
-		$('#inputAddress').val(employee.address);
-		$('#inputEmail').val(employee.email);
-		$('#employee-id').val(employee.id);
-		$('#tgl-id').val(employee.birthDay);
+	function _setFormModalUpdate(penjualan){
+		$('#input-no-penjualan').val(penjualan.no_penjualan);
+		$('#input-lokasi').val(penjualan.location);
+		$('#id-penjualan').val(penjualan.id);
+		$('#input-pembeli').
+			val(penjualan.customer.id).prop('selected', true);
 	}
 	//get form update data
 	function _getFormModalUpdate(){

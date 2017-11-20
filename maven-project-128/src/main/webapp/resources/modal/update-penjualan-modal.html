@@ -1,0 +1,37 @@
+<!-- modal for update employee -->
+<div class="modal fade" id="modal-data-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Employee</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+        	<input type="hidden" id="id-penjualan" />
+		   <label for="input-no-penjualan">No Penjualan</label>
+		   <input type="text" class="form-control" id="input-no-penjualan" aria-describedby="emailHelp" placeholder="Masukkan No Penjualan">
+		   <small id="nameHelp" class="form-text text-muted">fill your full name.</small>
+		 </div>
+		 <div class="form-group">
+		   <label for="input-lokasi">Lokasi</label>
+		   <input type="text" class="form-control" id="input-lokasi" placeholder="Lokasi Penjualan">
+		  </div>
+		  <div class="form-group">
+		   <label for="input-pembeli">Pembeli</label>
+		   <select class="form-control" id="input-pembeli" name="input-pembeli">
+		   	<c:forEach items="${customers}" var="customer">
+		   		<option value="${customer.id}">${customer.name}, ${customer.email}</option>
+		   	</c:forEach>
+		   </select>
+		  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="btn-change" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

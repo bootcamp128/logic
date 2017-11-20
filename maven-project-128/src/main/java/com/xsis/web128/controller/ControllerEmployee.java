@@ -40,7 +40,7 @@ public class ControllerEmployee {
 		return "redirect:/employee";
 	}
 	
-	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable int id){
 		Employee emp = new Employee();
@@ -61,6 +61,7 @@ public class ControllerEmployee {
 	@RequestMapping(value="/update", method=RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@RequestBody Employee emp){
-		//employeeService.update(emp);
+		employeeService.update(emp);
+	
 	}
 }
