@@ -59,4 +59,13 @@ public class PenjualanController {
 		penjualanService.save(penjualan);
 		return "redirect:/penjualan";
 	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@RequestMapping(value="/transaction", method=RequestMethod.POST)
+	public void doTransaction(@RequestBody List<Penjualan> penjualans){
+		for(Penjualan pen : penjualans){
+			System.out.println("no penjualan : "+ pen.getNo_penjualan());
+			
+		}
+	}
 }

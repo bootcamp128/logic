@@ -50,11 +50,28 @@
 				<td>
 					<a data-id="${penjualan.id}" class="del btn btn-danger btn-sm" href="#">Delete</a>
 					<a data-id="${penjualan.id}" class="upd btn btn-warning btn-sm" href="#">Update</a>
+					<a data-id="${penjualan.id}" customer-id="${penjualan.customer.id}" class="select-btn btn btn-warning btn-sm" href="#">Select</a>
 				</td>
 			</tr>
 		</c:forEach>
 			</tbody>
 		</table>
+		
+		<h3>Item yang dipilih : </h3>
+		<table id="table-selection" class="table table-striped table-hover table-bordered" style="border-collapse: collapse;" border=1>
+			<thead>
+				<tr class="bg-info">
+					<th scope="col">No Penjualan</th>
+					<th scope="col">Lokasi</th>
+					<th scop="col">Pembeli</th>
+					<th scop="col">Email Pembeli</th>
+					<th scope="col">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+		<a href="#" id="click-beli" class='btn btn-primary' >Beli!!</a>
 	</div><!-- bootstrap container -->
 	<%@ include file="/resources/modal/update-penjualan-modal.html" %>
 </body>

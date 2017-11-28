@@ -39,6 +39,66 @@ $(document).ready(function(){
 		$('#modal-data-edit').modal();
 	});
 	
+	$('.select-btn').on('click',  function(){
+		var dataTr = $(this).parent().parent();
+		var penjualanId = $(this).attr('data-id');
+		var customerId = $(this).attr('customer-id');
+		
+		var penjualan = {
+			id : penjualanId,
+			customer : {
+				id : customerId
+			},
+			noPenjualan : dataTr.find('td').eq(0).text(),
+			location : dataTr.find('td').eq(1).text(),
+			pembeli : dataTr.find('td').eq(2).text(),
+			emailPembeli : dataTr.find('td').eq(3).text()
+		}
+		__appendSelectionData(penjualan);
+		
+		dataTr.remove();
+	});
+	
+	//Read Table Selection to server 
+	$('#click-beli').on('click', function(){
+		
+		var oTable = $('#table-selection').find('tbody');
+		var dataPenjualan = [];
+		
+		$.each(oTable.find('tr'), function(index, data){
+			var cusId = $(this).attr('customer-id');
+			var penId = $(this).attr('data-id');
+	
+			var penjualan = {
+				id : penId,
+				no_penjualan: $(this).find('td').eq(0).text(),
+				location : $(this).find('td').eq(1).text(),
+				customer : {
+					id : cusId
+				}	
+			};
+			
+			dataPenjualan.push(penjualan);
+		});
+		
+		//send to server with ajax
+		$.ajax({
+			url : 'penjualan/transaction',
+			type: 'POST',
+			beforeSend : function(){
+				alert('si ajax mau sending data ');
+			},
+			data: JSON.stringify(dataPenjualan),
+			contentType: 'application/json',
+			success : function(data){
+				console.log(data);
+			},error : function(){
+				alert('gagal');
+			}
+			
+		});
+	});
+	
 	$('#btn-change').on('click', function(){
 		//var employee = _getFormModalUpdate();
 		var penjualan = {
@@ -81,5 +141,28 @@ $(document).ready(function(){
 			email : $('#inputEmail').val(),
 			birthDay: Date.parse($('#tgl-id').val())
 		};
+	}
+	
+	function __appendSelectionData(penjualan){
+		var tSelection = $('#table-selection');
+		var bodyTable = tSelection.find('tbody');
+		var trData = "<tr data-id='"+penjualan.id+"' customer-id='"+penjualan.customer.id+"'>";
+				trData+= "<td>";
+					trData+= penjualan.noPenjualan;
+				trData+= "</td>";
+				trData+= "<td>";
+					trData+= penjualan.location;
+				trData+= "</td>";
+				trData+= "<td>";
+					trData+= penjualan.pembeli;
+				trData+= "</td>";
+				trData+= "<td>";
+					trData+= penjualan.emailPembeli;
+				trData+= "</td>";
+				trData+= "<td>";
+					trData+= "<a class='btn btn-danger hapus-item'>hapus</a>";
+				trData+= "</td>";
+			trData+= "</tr>";
+		bodyTable.append(trData);
 	}
 });
